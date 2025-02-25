@@ -1,0 +1,11 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+       - "8000:8000"
+    environment:
+      PYTHONPATH: "/app"
+      TZ: "Asia/Tokyo"
+    env_file: .env
