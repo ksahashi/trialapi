@@ -1,10 +1,11 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter
+from fastapi_versioning import version
 
-router_v0 = APIRouter()
 router = APIRouter()
 
 @router.get("/")
-async def get_users() -> list:
+@version(0)
+async def get_users_v0() -> list:
     response = [
         "user1",
         "user2",
@@ -13,22 +14,42 @@ async def get_users() -> list:
 
     return response
 
+@router.get("/")
+@version(1)
+async def get_users() -> list:
+    response = [
+        "user1",
+        "user2",
+        "user3",
+        "user4",
+        "user5",
+    ]
+
+    return response
+
+@router.post("/")
+async def create_user() -> str:
+    return "OK"
+
+@router.patch("/")
+@version(1)
+async def update_user() -> str:
+    return "OK"
+
 @router.get("/version")
-async def get_version() -> dict:
+@version(0)
+async def get_version_v0() -> dict:
     response = {
-        'version': 'v1',
+        'version': 'v0',
     }
 
     return response
 
-@router_v0.get("/")
-async def get_users_v0(users: list = Depends(get_users)) -> list:
-    return users
-
-@router_v0.get("/version")
-async def get_version_v0() -> dict:
+@router.get("/version")
+@version(1)
+async def get_version() -> dict:
     response = {
-        'version': 'v0',
+        'version': 'v1',
     }
 
     return response

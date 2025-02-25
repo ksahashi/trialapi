@@ -1,4 +1,5 @@
 from fastapi import APIRouter
+from fastapi_versioning import version
 
 router = APIRouter()
 
