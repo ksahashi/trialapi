@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi_versioning import VersionedFastAPI
 from routers import (
     user,
     movie
@@ -7,16 +8,15 @@ from routers import (
 app = FastAPI()
 
 router_list = [
-    [[user.router_v0, user.router], "/user", ["user"]],
-    [[movie.router, movie.router], "/movie", ["movie"]],
+    [user.router, "/user", ["user"]],
+    [movie.router, "/movie", ["movie"]],
 ]
 for _router in router_list:
-    for index, _version in enumerate([0, 1]):
-        app.include_router(
-            _router[0][index],
-            prefix="/api/v" + str(_version) + _router[1],
-            tags=_router[2])
+    app.include_router(_router[0], prefix=_router[1], tags=_router[2])
 
-@app.get("/")
-async def root():
-    return {"message": "Hello World"}
+app = VersionedFastAPI(
+    app,
+    root_path="/api",
+    version_format='{major}',
+    prefix_format='/v{major}',
+    default_version=(0,0))
