@@ -1,9 +1,8 @@
 from fastapi import FastAPI
 from fastapi_versioning import VersionedFastAPI
-from routers import (
-    user,
-    movie
-)
+from mangum import Mangum
+
+from routers import movie, user
 
 app = FastAPI()
 
@@ -20,3 +19,5 @@ app = VersionedFastAPI(
     version_format='{major}',
     prefix_format='/v{major}',
     default_version=(0,0))
+
+handler = Mangum(app)

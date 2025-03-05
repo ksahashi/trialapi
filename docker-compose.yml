@@ -1,11 +1,40 @@
 services:
+  db:
+    image: mysql:8.0
+    platform: linux/amd64
+    command: --default-authentication-plugin=caching_sha2_password
+    volumes:
+      - ./db/my.cnf:/etc/mysql/conf.d/my.cnf:cached
+      - ./log/db:/var/log/mysql:cached
+    tty: true
+    ports:
+      - "33306:3306"
+    env_file:
+      - .env
+    healthcheck:
+      test: ["CMD", "mysql", "-uroot", "-ppassword", "-e", "SELECT 1"]
+      interval: 20s
+      timeout: 5s
+      retries: 10
+    networks:
+      - trial_network
+
   web:
     build:
       context: .
       dockerfile: Dockerfile
+    depends_on:
+      db:
+        condition: service_healthy
     ports:
        - "8000:8000"
     environment:
       PYTHONPATH: "/app"
       TZ: "Asia/Tokyo"
     env_file: .env
+    networks:
+      - trial_network
+
+networks:
+  trial_network:
+    external: true

@@ -38,3 +38,9 @@ uvicorn==0.34.0
 uvloop==0.21.0
 watchfiles==1.0.4
 websockets==15.0
+mangum~=0.17.0
+SQLAlchemy~=2.0.29
+sqlalchemy_utils~=0.41.2
+mysqlclient~=2.1.0
+pytz~=2024.1
+alembic~=1.13.1

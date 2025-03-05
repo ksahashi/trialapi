@@ -1,5 +1,9 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 from fastapi_versioning import version
+
+from cruds.user import get_user_by_id
+from database import get_db
+from models import User
 
 router = APIRouter()
 
@@ -52,4 +56,14 @@ async def get_version() -> dict:
         'version': 'v1',
     }
 
+    return response
+
+@router.get("/{user_id}")
+async def get_user(user_id: str, db=Depends(get_db)):
+    user = get_user_by_id(db, user_id)
+    response = {
+        'user_id': user.user_id,
+        'name': user.user_name,
+        'email_address': user.email_address
+    }
     return response
