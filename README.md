@@ -166,3 +166,6 @@ docker imagesで見るとpulされてる
 ずっとサービスのデプロイ進行中で終わったと思ったら、デプロイ失敗…
 何時間もやってやっぱり上手く行かねぇ… AWS気が狂ってる!
 やめよう…
+
+[参考1](https://qiita.com/free-honda/items/8014807dafcab622c961)
+[参考2](https://blog.serverworks.co.jp/entering-aws-ecs-fargate)
