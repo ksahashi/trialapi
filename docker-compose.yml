@@ -35,6 +35,28 @@ services:
     networks:
       - trial_network
 
+  test:
+    build:
+      context: .
+      dockerfile: Dockerfile.test
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - ./src:/app:cached
+      - ./db:/db:cached
+      - ./tests:/tests:cached
+    environment:
+      PYTHONPATH: "/app"
+      TZ: "Asia/Tokyo"
+    env_file: .env
+    restart: no
+    networks:
+      - trial_network
+
 networks:
+  default:
+    name: bridge
   trial_network:
-    external: true
+    name: trial_network
+    driver: bridge

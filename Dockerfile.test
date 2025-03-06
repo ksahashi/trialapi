@@ -1,0 +1,26 @@
+# Use an official lightweight Python image.
+FROM python:3.10-slim
+
+RUN apt-get update && apt-get install -y gcc default-libmysqlclient-dev pkg-config python3-dev curl
+# Set the working directory in docker
+WORKDIR /app
+
+# Copy the dependencies file to the working directory
+COPY src/requirements/requirements.txt /app/requirements-src.txt
+COPY tests/requirements/requirements.txt /app/requirements-test.txt
+
+# Install any dependencies
+RUN pip install --no-cache-dir -r /app/requirements-src.txt
+RUN pip install --no-cache-dir -r /app/requirements-test.txt
+
+# Copy the content of the local src directory to the working directory
+COPY ./src/ .
+COPY ./db/ ../db
+COPY ./tests/ ../tests
+
+COPY ./script/entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
+
+# Specify the command to run on container start
+CMD ["pytest", "../tests", "-vvv", "--disable-warnings"]
