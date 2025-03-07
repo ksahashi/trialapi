@@ -19,27 +19,27 @@ services:
     networks:
       - trial_network
 
-  web:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    depends_on:
-      db:
-        condition: service_healthy
-    ports:
-       - "8000:8000"
-    environment:
-      - PYTHONPATH=/app
-      - TZ=Asia/Tokyo
-      - MYSQL_USER=${MYSQL_USER}
-      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-      - MYSQL_HOST=${MYSQL_HOST}
-      - MYSQL_PORT=${MYSQL_PORT}
-      - MYSQL_DATABASE=${MYSQL_DATABASE}
-#    env_file: .env
-    networks:
-      - trial_network
+#  web:
+#    build:
+#      context: .
+#      dockerfile: Dockerfile
+#    depends_on:
+#      db:
+#        condition: service_healthy
+#    ports:
+#       - "8000:8000"
+#    environment:
+#      - PYTHONPATH=/app
+#      - TZ=Asia/Tokyo
+#      - MYSQL_USER=${MYSQL_USER}
+#      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+#      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+#      - MYSQL_HOST=${MYSQL_HOST}
+#      - MYSQL_PORT=${MYSQL_PORT}
+#      - MYSQL_DATABASE=${MYSQL_DATABASE}
+##    env_file: .env
+#    networks:
+#      - trial_network
 
   test:
     build:
