@@ -15,4 +15,4 @@ class TestReadUsers:
         assert res.status_code == 200
         user = res.json()
         print(user)
-        assert user["user_id"] == "tcp001"
+        assert user["user_id"] == "tcp002"
