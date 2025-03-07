@@ -9,8 +9,8 @@ services:
     tty: true
     ports:
       - "33306:3306"
-    env_file:
-      - .env
+#    env_file:
+#      - .env
     healthcheck:
       test: ["CMD", "mysql", "-uroot", "-ppassword", "-e", "SELECT 1"]
       interval: 20s
@@ -29,9 +29,15 @@ services:
     ports:
        - "8000:8000"
     environment:
-      PYTHONPATH: "/app"
-      TZ: "Asia/Tokyo"
-    env_file: .env
+      - PYTHONPATH=/app
+      - TZ=Asia/Tokyo
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_HOST=${MYSQL_HOST}
+      - MYSQL_PORT=${MYSQL_PORT}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+#    env_file: .env
     networks:
       - trial_network
 
@@ -47,9 +53,15 @@ services:
       - ./db:/db:cached
       - ./tests:/tests:cached
     environment:
-      PYTHONPATH: "/app"
-      TZ: "Asia/Tokyo"
-    env_file: .env
+      - PYTHONPATH=/app
+      - TZ=Asia/Tokyo
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_HOST=${MYSQL_HOST}
+      - MYSQL_PORT=${MYSQL_PORT}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+#    env_file: .env
     restart: no
     networks:
       - trial_network
