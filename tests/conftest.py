@@ -9,7 +9,7 @@ class TestDB:
         self.db = SessionLocal()
 
 
-@pytest.fixture()
+@pytest.fixture(scope="session")
 def fastapi_client():
     return TestClient(app)
 
