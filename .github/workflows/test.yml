@@ -28,7 +28,7 @@ jobs:
 #        run: docker compose up -d
 
       - name: Run tests docker compose action
-        uses: adambirds/docker-compose-action@1.5.0
+        uses: adambirds/docker-compose-action@v1.5.0
         with:
           comopse-file: "./docker-compose.yml"
           up-flags: "--build"
