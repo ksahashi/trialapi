@@ -10,6 +10,9 @@ COPY src/requirements/requirements.txt /app/requirements-src.txt
 COPY tests/requirements/requirements.txt /app/requirements-test.txt
 COPY tests/pyproject.toml /app/pyproject.toml
 
+# Add this line to upgrade pip
+RUN pip install --upgrade pip
+
 # Install any dependencies
 RUN pip install --no-cache-dir -r /app/requirements-src.txt
 RUN pip install --no-cache-dir -r /app/requirements-test.txt
