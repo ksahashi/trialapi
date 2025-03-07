@@ -6,7 +6,7 @@ RUN apt-get update && apt-get install -y gcc default-libmysqlclient-dev pkg-conf
 WORKDIR /app
 
 # Copy the dependencies file to the working directory
-COPY src/requirements/requirements.txt /app/requirements-src.txt
+COPY src/requirements/requirements.txt /app/requirements.txt
 COPY tests/requirements/requirements.txt /app/requirements-test.txt
 COPY tests/pyproject.toml /app/pyproject.toml
 
@@ -14,7 +14,7 @@ COPY tests/pyproject.toml /app/pyproject.toml
 RUN pip install --upgrade pip
 
 # Install any dependencies
-RUN pip install --no-cache-dir -r /app/requirements-src.txt
+RUN pip install --no-cache-dir -r /app/requirements.txt
 RUN pip install --no-cache-dir -r /app/requirements-test.txt
 
 # Copy the content of the local src directory to the working directory
