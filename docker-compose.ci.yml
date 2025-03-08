@@ -13,7 +13,7 @@ services:
       - MYSQL_USER
       - MYSQL_PASSWORD
       - MYSQL_ROOT_PASSWORD
-    env_file: .env.ci
+    env_file: .env.test
     healthcheck:
       test: ["CMD", "mysql", "-uroot", "-ppassword", "-e", "SELECT 1"]
       interval: 20s
@@ -39,7 +39,7 @@ services:
       - MYSQL_USER
       - MYSQL_PASSWORD
       - MYSQL_ROOT_PASSWORD
-    env_file: .env.ci
+    env_file: .env.test
     restart: no
     networks:
       - trial_network
