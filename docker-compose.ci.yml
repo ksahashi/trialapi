@@ -9,7 +9,7 @@ services:
     tty: true
     ports:
       - "3307:3306"
-    env_file: .env_ci
+    env_file: .env.ci
     healthcheck:
       test: ["CMD", "mysql", "-uroot", "-ppassword", "-e", "SELECT 1"]
       interval: 20s
