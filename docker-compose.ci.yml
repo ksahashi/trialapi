@@ -29,7 +29,7 @@ services:
       - ./src:/app:cached
       - ./db:/db:cached
       - ./tests:/tests:cached
-    env_file: .env_ci
+    env_file: .env.ci
     restart: no
     networks:
       - trial_network
