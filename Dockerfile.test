@@ -28,5 +28,3 @@ ENTRYPOINT ["/entrypoint.sh"]
 
 # Specify the command to run on container start
 CMD ["pytest", "../tests", "--verbose", "--disable-warnings"]
-
-RUN echo end!!
