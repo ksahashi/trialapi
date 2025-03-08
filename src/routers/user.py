@@ -1,9 +1,8 @@
 from fastapi import APIRouter, Depends
 from fastapi_versioning import version
 
-from cruds.user import get_user_by_id
+from cruds.user import get_users, get_user_by_id
 from database import get_db
-from models import User
 
 router = APIRouter()
 
@@ -20,15 +19,13 @@ async def get_users_v0() -> list:
 
 @router.get("/")
 @version(1)
-async def get_users() -> list:
-    response = [
-        "user1",
-        "user2",
-        "user3",
-        "user4",
-        "user5",
-    ]
-
+async def get_users_v1(db=Depends(get_db)) -> list:
+    users = get_users(db)
+    response = ({
+        "user_id": u.user_id,
+        "user_name": u.user_name,
+        "email_address": u.email_address,
+    } for u in users)
     return response
 
 @router.post("/")
