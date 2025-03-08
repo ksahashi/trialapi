@@ -39,7 +39,7 @@ services:
       - MYSQL_USER
       - MYSQL_PASSWORD
       - MYSQL_ROOT_PASSWORD
-  env_file: .env.ci
+    env_file: .env.ci
     restart: no
     networks:
       - trial_network
