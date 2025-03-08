@@ -19,7 +19,7 @@ class TestReadUsers:
         assert res.status_code == 200
         users = res.json()
         print(users)
-        assert len(users) >= 1
+        assert len(users) >= 2
 
 
     def test_read_user(self, fastapi_client, db_session):
