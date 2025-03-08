@@ -5,9 +5,6 @@ WORKDIR /app
 
 COPY src/requirements/requirements.txt /app/requirements.txt
 
-# Add this line to upgrade pip
-RUN pip install --upgrade pip
-
 RUN pip install --no-cache-dir -r /app/requirements.txt
 
 COPY ./src/ .

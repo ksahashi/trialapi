@@ -6,9 +6,9 @@ from sqlalchemy import pool
 
 from alembic import context
 
-from env import DB_USER, DB_PORT, DB_PASSWORD, DB_HOST, DB_NAME
+from env import DB_USER, DB_PASSWORD, DB_HOST, DB_NAME
 
-DATABASE = f"mysql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}?charset=utf8"
+DATABASE = f"mysql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}/{DB_NAME}?charset=utf8"
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
