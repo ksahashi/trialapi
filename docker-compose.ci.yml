@@ -29,6 +29,9 @@ services:
       - ./src:/app:cached
       - ./db:/db:cached
       - ./tests:/tests:cached
+    environment:
+      - PYTHONPATH=/app
+      - TZ=Asia/Tokyo
     env_file: .env.ci
     restart: no
     networks:
