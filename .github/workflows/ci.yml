@@ -1,4 +1,4 @@
-3name: test
+name: test
 
 on:
   push:
