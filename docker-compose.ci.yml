@@ -9,12 +9,7 @@ services:
     tty: true
     ports:
       - "3307:3306"
-    envionmenrt:
-      - MYSQL_USER
-      - MYSQL_PASSWORD
-      - MYSQL_ROOT_PASSWORD
-      - MYSQL_HOST=testdb
-      - MYSQL_DATABASE=trial_db
+    env_file: .env_ci
     healthcheck:
       test: ["CMD", "mysql", "-uroot", "-ppassword", "-e", "SELECT 1"]
       interval: 20s
@@ -34,13 +29,7 @@ services:
       - ./src:/app:cached
       - ./db:/db:cached
       - ./tests:/tests:cached
-    environment:
-      - PYTHONPATH=/app
-      - TZ=Asia/Tokyo
-      - MYSQL_USER
-      - MYSQL_PASSWORD
-      - MYSQL_HOST=testdb
-      - MYSQL_DATABASE=trial_db
+    env_file: .env_ci
     restart: no
     networks:
       - trial_network
