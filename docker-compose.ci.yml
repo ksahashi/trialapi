@@ -9,6 +9,10 @@ services:
     tty: true
     ports:
       - "3307:3306"
+    environment:
+      - MYSQL_USER
+      - MYSQL_PASSWORD
+      - MYSQL_ROOT_PASSWORD
     env_file: .env.ci
     healthcheck:
       test: ["CMD", "mysql", "-uroot", "-ppassword", "-e", "SELECT 1"]
@@ -32,7 +36,10 @@ services:
     environment:
       - PYTHONPATH=/app
       - TZ=Asia/Tokyo
-    env_file: .env.ci
+      - MYSQL_USER
+      - MYSQL_PASSWORD
+      - MYSQL_ROOT_PASSWORD
+  env_file: .env.ci
     restart: no
     networks:
       - trial_network
