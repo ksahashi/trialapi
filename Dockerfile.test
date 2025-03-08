@@ -9,11 +9,10 @@ WORKDIR /app
 COPY src/requirements/requirements.txt /app/requirements.txt
 COPY tests/requirements/requirements.txt /app/requirements-test.txt
 COPY tests/pyproject.toml /app/pyproject.toml
-
-# Add this line to upgrade pip
-RUN pip install --upgrade pip
+COPY .env.ci /app/.env.ci
 
 # Install any dependencies
+#RUN pip install --upgrade pip
 RUN pip install --no-cache-dir -r /app/requirements.txt
 RUN pip install --no-cache-dir -r /app/requirements-test.txt
 

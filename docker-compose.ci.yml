@@ -1,5 +1,5 @@
 services:
-  db:
+  testdb:
     image: mysql:8.0
     platform: linux/amd64
     command: --default-authentication-plugin=caching_sha2_password
@@ -8,8 +8,8 @@ services:
       - ./log/db:/var/log/mysql:cached
     tty: true
     ports:
-      - "3306:3306"
-    env_file: .env
+      - "3307:3306"
+    env_file: .env.ci
     healthcheck:
       test: ["CMD", "mysql", "-uroot", "-ppassword", "-e", "SELECT 1"]
       interval: 20s
@@ -18,22 +18,22 @@ services:
     networks:
       - trial_network
 
-  web:
+  test:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.test
     depends_on:
-      db:
+      testdb:
         condition: service_healthy
-    ports:
-       - "8000:8000"
+    volumes:
+      - ./src:/app:cached
+      - ./db:/db:cached
+      - ./tests:/tests:cached
     environment:
       - PYTHONPATH=/app
       - TZ=Asia/Tokyo
-      - AWS_ACCESS_KEY_ID
-      - AWS_SECRET_ACCESS_KEY
-      - AWS_SESSION_TOKEN
-    env_file: .env
+    env_file: .env.ci
+    restart: no
     networks:
       - trial_network
 
