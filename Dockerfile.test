@@ -9,6 +9,7 @@ WORKDIR /app
 COPY src/requirements/requirements.txt /app/requirements.txt
 COPY tests/requirements/requirements.txt /app/requirements-test.txt
 COPY tests/pyproject.toml /app/pyproject.toml
+COPY .env.ci /app/.env.ci
 
 # Install any dependencies
 #RUN pip install --upgrade pip
