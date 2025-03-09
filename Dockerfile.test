@@ -25,4 +25,4 @@ RUN chmod +x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
 
 # Specify the command to run on container start
-CMD ["pytest", "../tests", "--verbose", "--disable-warnings"]
+CMD ["pytest", "../tests", "--verbose"]

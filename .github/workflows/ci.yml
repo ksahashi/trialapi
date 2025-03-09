@@ -29,4 +29,4 @@ jobs:
           up-flags: "--build"
           down-flags: "--volumes"
           test-container: "test"
-          test-command: "pytest ../tests --verbose --disable-warnings"
+          test-command: "pytest ../tests --verbose"
