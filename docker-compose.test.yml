@@ -29,6 +29,7 @@ services:
       - ./src:/app:cached
       - ./db:/db:cached
       - ./tests:/tests:cached
+      - ./tests/htmlcov:/app/htmlcov
     environment:
       - PYTHONPATH=/app
       - TZ=Asia/Tokyo

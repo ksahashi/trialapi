@@ -1,2 +1,12 @@
 [tool.pytest.ini_options]
 asyncio_default_fixture_loop_scope = "function"
+filterwarnings = [
+  "ignore::PendingDeprecationWarning"
+]
+addopts = [
+  "--cov=routers",
+  "--cov=cruds",
+  "--cov-report=html",
+  "--cov-report=term-missing",
+  "--verbose"
+]
