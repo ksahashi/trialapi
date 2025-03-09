@@ -24,4 +24,4 @@ jobs:
 
       - name: Run tests docker compose action
         run: |
-          COMPOSE_FILE=docker-compose.test.yml:docker-compose.ci.yml docker compose run --rm --remove-orphans test
+          docker compose -f docker-compose.test.yml run --rm --remove-orphans test
