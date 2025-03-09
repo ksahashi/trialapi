@@ -1,52 +1,14 @@
 services:
   testdb:
-    image: mysql:8.0
-    platform: linux/amd64
-    command: --default-authentication-plugin=caching_sha2_password
-    volumes:
-      - ./db/my.cnf:/etc/mysql/conf.d/my.cnf:cached
-      - ./log/db:/var/log/mysql:cached
-    tty: true
-    ports:
-      - "3307:3306"
     environment:
       - MYSQL_USER
       - MYSQL_PASSWORD
       - MYSQL_ROOT_PASSWORD
-    env_file: .env.test
-    healthcheck:
-      test: ["CMD", "mysql", "-uroot", "-ppassword", "-e", "SELECT 1"]
-      interval: 20s
-      timeout: 5s
-      retries: 10
-    networks:
-      - trial_network
+    env_file: .env.ci
 
   test:
-    build:
-      context: .
-      dockerfile: Dockerfile.test
-    depends_on:
-      testdb:
-        condition: service_healthy
-    volumes:
-      - ./src:/app:cached
-      - ./db:/db:cached
-      - ./tests:/tests:cached
     environment:
-      - PYTHONPATH=/app
-      - TZ=Asia/Tokyo
       - MYSQL_USER
       - MYSQL_PASSWORD
       - MYSQL_ROOT_PASSWORD
-    env_file: .env.test
-    restart: no
-    networks:
-      - trial_network
-
-networks:
-  default:
-    name: bridge
-  trial_network:
-    name: trial_network
-    driver: bridge
+    env_file: .env.ci
