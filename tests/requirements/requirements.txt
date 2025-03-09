@@ -3,3 +3,4 @@ pytest-asyncio
 httpx
 arrow
 freezegun
+pytest-cov
