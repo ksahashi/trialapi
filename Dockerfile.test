@@ -5,20 +5,18 @@ RUN apt-get update && apt-get install -y gcc default-libmysqlclient-dev pkg-conf
 # Set the working directory in docker
 WORKDIR /app
 
-# Copy the dependencies file to the working directory
-COPY src/requirements/requirements.txt /app/requirements.txt
-COPY tests/requirements/requirements.txt /app/requirements-test.txt
-COPY tests/pyproject.toml /app/pyproject.toml
-COPY .env.test /app/.env.test
-
-# Install any dependencies
-RUN pip install --no-cache-dir -r /app/requirements.txt
-RUN pip install --no-cache-dir -r /app/requirements-test.txt
-
 # Copy the content of the local src directory to the working directory
 COPY ./src/ .
 COPY ./db/ ../db
 COPY ./tests/ ../tests
+
+# Copy the dependencies file to the working directory
+COPY tests/.coveragerc /app/.coveragerc
+COPY .env.test /app/.env.test
+
+# Install any dependencies
+RUN pip install --no-cache-dir -r requirements/requirements.txt
+RUN pip install --no-cache-dir -r ../tests/requirements/requirements.txt
 
 COPY ./script/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh

@@ -4,6 +4,7 @@ filterwarnings = [
   "ignore::PendingDeprecationWarning"
 ]
 addopts = [
+  "--cov-config=.coveragerc",
   "--cov=routers",
   "--cov=cruds",
   "--cov-report=html",
