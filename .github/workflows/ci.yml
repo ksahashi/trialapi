@@ -1,0 +1,27 @@
+name: test
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - 'develop**'
+      - main
+
+env:
+  MYSQL_USER: ${{secrets.MYSQL_USER}}
+  MYSQL_PASSWORD: ${{secrets.MYSQL_PASSWORD}}
+  MYSQL_ROOT_PASSWORD: ${{secrets.MYSQL_ROOT_PASSWORD}}
+
+jobs:
+  ci:
+    name: Run CI tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run tests docker compose action
+        run: |
+          docker compose -f docker-compose.test.yml run --rm --remove-orphans test
