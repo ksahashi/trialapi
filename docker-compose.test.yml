@@ -26,9 +26,6 @@ services:
       testdb:
         condition: service_healthy
     volumes:
-      - ./src:/app:cached
-      - ./db:/db:cached
-      - ./tests:/tests:cached
       - ./tests/htmlcov:/app/htmlcov
     environment:
       - PYTHONPATH=/app
