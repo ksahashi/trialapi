@@ -1,0 +1,68 @@
+[tool.ruff]
+extend-exclude = [
+    "db",
+    "seed.py",
+    "test_*.py",
+    "tests",
+]
+line-length = 120
+indent-width = 4
+
+# Assume Python 3.10.
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = [
+    "RSE", # flake8-raise
+    "C90", # mccabe
+    "T20", # flake8-print
+    "SLF", #  flake8-self
+    "BLE", # flake8-blind-except
+    "FBT", # flake8-boolean-trap
+    "TRY", # tryceratops
+    "COM", # flake8-commas
+    "S", # flake8-bandit
+    "EM", #flake8-errmsg
+    "EXE", # flake8-executable
+    "ICN", # flake8-import-conventions
+    "RET",#flake8-return
+    "SIM",#flake8-simplify
+    "TCH", # flake8-type-checking
+    "PTH", #pathlib
+    "ISC", #flake8-implicit-str-concat
+    "N", # pep8-naming
+    "PT", # flake8-pytest-style]
+
+    "D", # pydocstyle,
+    "PLR", # Refactor
+    "ANN001", # missing-type-function-argument
+    "ANN201", # missing-return-type-undocumented-public-function
+    "ANN202", # missing-return-type-private-function
+    "ANN204", # missing-return-type-special-method
+    "ANN401", # any-type
+    "B008", # function-call-in-default-argument
+    "DTZ002", # call-datetime-today
+    "DTZ005", # call-datetime-now-without-tzinfo
+    "DTZ007", # call-datetime-strptime-without-zone
+    "E712", # true-false-comparison
+    "ERA001", # commented-out-code
+    "W605", # invalid-escape-sequence
+    "UP007", # non-pep604-annotation-union
+    "RUF001", # ambiguous-unicode-character-string
+    "RUF002", # ambiguous-unicode-character-docstring
+    "RUF003", # ambiguous-unicode-character-comment
+    "RUF012", # mutable-class-default
+    "Q000", # bad-quotes-inline-string
+    "INP001", # implicit-namespace-package
+]
+
+# Allow fix for all enabled rules (when `--fix`) is provided.
+fixable = ["ALL"]
+unfixable = []
+
+[tool.ruff.format]
+# Like Black, use double quotes for strings.
+quote-style = "double"
+# Like Black, use spaces for indentation.
+indent-style = "space"

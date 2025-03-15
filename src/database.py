@@ -18,7 +18,7 @@ SessionLocal = scoped_session(
 
 Base = declarative_base()
 
-def get_db():  # noqa: ANN201
+def get_db():
     try:
         db = SessionLocal()
         yield db
