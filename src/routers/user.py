@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends
 from fastapi_versioning import version
 
-from cruds.user import get_users, get_user_by_id
+from cruds.user import get_user_by_id, get_users
 from database import get_db
 
 router = APIRouter()
