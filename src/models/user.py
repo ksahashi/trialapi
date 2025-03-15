@@ -4,8 +4,6 @@ from sqlalchemy_utils import EmailType
 
 from database import Base
 
-from .mixin import BaseMixin
-
 
 class User(Base):
     __tablename__ = "users"

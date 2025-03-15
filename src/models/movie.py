@@ -3,8 +3,6 @@ from sqlalchemy.types import Boolean, Date, DateTime, Integer, String
 
 from database import Base
 
-from .mixin import BaseMixin
-
 
 class Movie(Base):
     __tablename__ = "movies"
