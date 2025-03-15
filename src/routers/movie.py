@@ -6,7 +6,7 @@ from database import get_db
 router = APIRouter()
 
 @router.get("/")
-async def get_movie(db=Depends(get_db)) -> list:  # noqa: ANN001
+async def get_movie(db=Depends(get_db)) -> list:
     movies = get_movies(db)
     response = ({
         'movie_code': m.movie_code,
